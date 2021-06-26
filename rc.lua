@@ -423,9 +423,9 @@ globalkeys = mytable.join(
               {description = "show weather", group = "widgets"}),
 
     -- Screen brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("xbacklight -inc 5") end,
+    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl +5") end,
               {description = "+5%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("xbacklight -dec 5") end,
+    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl -5") end,
               {description = "-5%", group = "hotkeys"}),
 
     -- ALSA volume control
@@ -813,7 +813,7 @@ awful.spawn.with_shell("compton")
 
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("blueman-applet")
-awful.spawn.with_shell("bash -c 'xinput set-prop 12 178 1.8 0 0 0 1.8 0 0 0 1'")
+awful.spawn.with_shell("bash -c 'xinput set-prop 12 181 1.8 0 0 0 1.8 0 0 0 1'")
 
 
 
