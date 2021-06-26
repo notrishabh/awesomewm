@@ -537,10 +537,13 @@ globalkeys = mytable.join(
     -- Chrome
     awful.key({ modkey },            "b",     function () awful.util.spawn("google-chrome") end,
               {description = "Google Chrome", group = "applications"}),
+    -- Spotify
+    awful.key({ modkey },            "a",     function () awful.util.spawn("bash -c 'LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify'") end,
+              {description = "Spotify", group = "applications"}),
     -- copy-google
     awful.key({ "Control", "Shift" },            "g",     function () awful.util.spawn("bash -c './copy-google'") end,
               {description = "copy-google", group = "automation"}),
-    -- bluetooth scipts
+    -- bluetooth scripts
     awful.key({ "Control", "Shift" },            "m",     function () awful.util.spawn("bash -c 'pactl set-card-profile bluez_card.18_95_52_6E_0F_A6 a2dp-sink'") end,
               {description = "better audio (a2dp)", group = "bt earphone"}),
 
