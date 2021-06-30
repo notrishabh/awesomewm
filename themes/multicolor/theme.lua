@@ -10,6 +10,10 @@ local lain  = require("lain")
 local awful = require("awful")
 local wibox = require("wibox")
 local dpi   = require("beautiful.xresources").apply_dpi
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -97,17 +101,26 @@ local markup = lain.util.markup
 os.setlocale(os.getenv("LANG")) -- to localize the clock
 local clockicon = wibox.widget.imagebox(theme.widget_clock)
 local mytextclock = wibox.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#ab7367", "") .. markup("#de5e1e", " %H:%M "))
+local cw = calendar_widget({
+    theme = 'outrun',
+    radius = 8
+})
+mytextclock:connect_signal("button::press", 
+    function(_, _, _, button)
+        if button == 1 then cw.toggle() end
+    end)
 mytextclock.font = theme.font
 
 -- Calendar
-theme.cal = lain.widget.cal({
-    attach_to = { mytextclock },
-    notification_preset = {
-        font = "Terminus 15",
-        fg   = theme.fg_normal,
-        bg   = theme.bg_normal
-    }
-})
+-- local cw = calendar_widget()
+-- theme.cal = lain.widget.cal({
+--     attach_to = { mytextclock },
+--     notification_preset = {
+--         font = "Terminus 15",
+--         fg   = theme.fg_normal,
+--         bg   = theme.bg_normal
+--     }
+-- })
 
 -- Weather
 --[[ to be set before use
@@ -292,6 +305,7 @@ function theme.at_screen_connect(s)
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
+        expand = "none",
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             --s.mylayoutbox,
@@ -301,7 +315,7 @@ function theme.at_screen_connect(s)
             theme.mpd.widget,
         },
         --s.mytasklist, -- Middle widget
-        nil,
+        mytextclock,
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
@@ -311,8 +325,27 @@ function theme.at_screen_connect(s)
             -- netdowninfo,
             -- netupicon,
             -- netupinfo.widget,
-            volicon,
-            theme.volume.widget,
+            -- volicon,
+            -- theme.volume.widget,
+            volume_widget{
+                mixer_cmd = 'pavucontrol',
+                icon_dir = './icons',
+                widget_type = 'horizontal_bar',
+                with_icon = true,
+                main_color = '#0377fc',
+                margins = 5,
+            },
+            batteryarc_widget({
+                show_current_level = true,
+                arc_thickness = 1,
+                size = 50,
+                main_color = '#3df56f',
+                show_notification_mode = 'on_click',
+            }),
+            logout_menu_widget{
+                font = 'Play 10',
+                onlock = function() awful.spawn.with_shell('i3lock-fancy') end
+            }
             -- memicon,
             -- memory.widget,
             -- cpuicon,
@@ -323,10 +356,10 @@ function theme.at_screen_connect(s)
             --theme.weather.widget,
             -- tempicon,
             -- temp.widget,
-            baticon,
-            bat.widget,
-            clockicon,
-            mytextclock,
+            -- baticon,
+            -- bat.widget,
+            -- clockicon,
+            -- mytextclock,
         },
     }
 
