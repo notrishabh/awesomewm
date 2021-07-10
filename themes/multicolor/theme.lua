@@ -188,18 +188,18 @@ local temp = lain.widget.temp({
 })
 
 -- Battery
-local baticon = wibox.widget.imagebox(theme.widget_batt)
-local bat = lain.widget.bat({
-    settings = function()
-        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+-- local baticon = wibox.widget.imagebox(theme.widget_batt)
+-- local bat = lain.widget.bat({
+--     settings = function()
+--         local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
 
-        if bat_now.ac_status == 1 then
-            perc = perc .. " plug"
-        end
+--         if bat_now.ac_status == 1 then
+--             perc = perc .. " plug"
+--         end
 
-        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
-    end
-})
+--         widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+--     end
+-- })
 
 -- ALSA volume
 local volicon = wibox.widget.imagebox(theme.widget_vol)
