@@ -320,8 +320,8 @@ globalkeys = mytable.join(
         {description = "focus right", group = "client"}),
 
     -- Menu
-    awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
-              {description = "show main menu", group = "awesome"}),
+    -- awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
+            --   {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
@@ -537,6 +537,9 @@ globalkeys = mytable.join(
     -- Chrome
     awful.key({ modkey },            "b",     function () awful.util.spawn("google-chrome") end,
               {description = "Google Chrome", group = "applications"}),
+    -- Discord
+    awful.key({ modkey },            "w",     function () awful.util.spawn("discord") end,
+              {description = "Discord", group = "applications"}),
     -- Spotify
     awful.key({ modkey },            "a",     function () awful.util.spawn("bash -c 'LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify'") end,
               {description = "Spotify", group = "applications"}),
