@@ -819,6 +819,7 @@ awful.spawn.with_shell("compton")
 
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("blueman-applet")
+awful.spawn.with_shell("kdeconnect-indicator")
 awful.spawn.with_shell("bash -c 'xinput set-prop 12 181 1.8 0 0 0 1.8 0 0 0 1'")
 
 
