@@ -13,7 +13,7 @@ local dpi   = require("beautiful.xresources").apply_dpi
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
-local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+--local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
 
 local os = os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
@@ -58,7 +58,7 @@ theme.widget_clock                              = theme.confdir .. "/icons/clock
 theme.widget_vol                                = theme.confdir .. "/icons/spkr.png"
 theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
 theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
-theme.tasklist_plain_task_name                  = true
+theme.tasklist_disable_task_name                  = true
 theme.tasklist_disable_icon                     = true
 theme.useless_gap                               = 0
 theme.layout_tile                               = theme.confdir .. "/icons/tile.png"
@@ -342,10 +342,10 @@ function theme.at_screen_connect(s)
                 main_color = '#3df56f',
                 show_notification_mode = 'on_click',
             }),
-            logout_menu_widget{
-                font = 'Play 10',
-                onlock = function() awful.spawn.with_shell('i3lock-fancy') end
-            }
+            --logout_menu_widget{
+            --    font = 'Play 10',
+            --    onlock = function() awful.spawn.with_shell('i3lock-fancy') end
+            --}
             -- memicon,
             -- memory.widget,
             -- cpuicon,
