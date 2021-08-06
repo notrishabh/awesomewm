@@ -23,7 +23,6 @@ local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
-
 -- }}}
 
 -- {{{ Error handling
@@ -103,7 +102,7 @@ local altkey       = "Mod1"
 local terminal     = "x-terminal-emulator"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true  -- cycle with only the previously focused client or all https://github.com/lcpz/awesome-copycats/issues/274
-local editor       = os.getenv("EDITOR") or "code"
+local editor       = os.getenv("EDITOR") or "nvim"
 local browser      = "google-chrome"
 
 awful.util.terminal = terminal
@@ -815,11 +814,11 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 awful.spawn.with_shell("feh --bg-fill --randomize ~/Downloads/Wallpapers")
-awful.spawn.with_shell("compton")
+awful.spawn.with_shell("picom")
 
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("blueman-applet")
-awful.spawn.with_shell("kdeconnect-indicator")
+--awful.spawn.with_shell("kdeconnect-indicator")
 awful.spawn.with_shell("bash -c 'xinput set-prop 12 181 1.8 0 0 0 1.8 0 0 0 1'")
 
 
