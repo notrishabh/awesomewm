@@ -23,6 +23,7 @@ local freedesktop   = require("freedesktop")
 local hotkeys_popup = require("awful.hotkeys_popup")
                       require("awful.hotkeys_popup.keys")
 local mytable       = awful.util.table or gears.table -- 4.{0,1} compatibility
+local config_dir    = gears.filesystem.get_configuration_dir()
 -- }}}
 
 -- {{{ Error handling
@@ -421,11 +422,11 @@ globalkeys = mytable.join(
     awful.key({ altkey, }, "w", function () if beautiful.weather then beautiful.weather.show(7) end end,
               {description = "show weather", group = "widgets"}),
 
-    -- Screen brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl +5") end,
-              {description = "+5%", group = "hotkeys"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl -5") end,
-              {description = "-5%", group = "hotkeys"}),
+   -- Screen brightness
+   awful.key({ }, "XF86MonBrightnessUp", function () os.execute("brightnessctl +5") end,
+             {description = "+5%", group = "hotkeys"}),
+   awful.key({ }, "XF86MonBrightnessDown", function () os.execute("brightnessctl -5") end,
+             {description = "-5%", group = "hotkeys"}),
 
     -- ALSA volume control
     awful.key({}, "XF86AudioRaiseVolume",
@@ -814,7 +815,7 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 
 awful.spawn.with_shell("feh --bg-fill --randomize ~/Downloads/Wallpapers")
-awful.spawn.with_shell("picom")
+awful.spawn.with_shell('picom --experimental-backends --config ' .. config_dir .. '/picom.conf')
 
 awful.spawn.with_shell("nm-applet")
 awful.spawn.with_shell("blueman-applet")
